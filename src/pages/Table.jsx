@@ -2,31 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { FaAngleDoubleLeft, FaAngleLeft, FaAngleRight, FaAngleDoubleRight, FaSort, FaSortUp, FaSortDown, FaEye, FaInfoCircle } from 'react-icons/fa';
 import { Link } from "react-router-dom";
 import ModalProd from "../components/ModalProd";
+import { formatCurrency, formatNumber } from '../utils/funciones';
 
 const API = 'https://dummyjson.com/products?limit=200';
 
 const Table = () => {
-    const formatCurrency = (value) => {
-        const numericValue = Number(value);
-        if (isNaN(numericValue)) {
-            return '0,00';
-        }
-        // Forzar formato con separador de miles siempre
-        const parts = numericValue.toFixed(2).split('.');
-        const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-        const decimalPart = parts[1];
-        return `${integerPart},${decimalPart}`;
-    };
-
-    const formatNumber = (value) => {
-        const numericValue = Number(value);
-        if (isNaN(numericValue)) {
-            return '0';
-        }
-        // Formato sin decimales
-        const integerValue = Math.round(numericValue);
-        return integerValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-    };
+    
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
