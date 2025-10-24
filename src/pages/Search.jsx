@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import ModalProd from '../components/ModalProd';
 import CardProd from '../components/CardProd';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const API='https://dummyjson.com/products/search?q=';
 
@@ -14,9 +14,20 @@ const Search = () => {
     const datoSelected = datos[producto];
 
     const location = useLocation();
-    const query = location.state;
-    const URI = API + query;
-    const getDatos = async() => {
+    const txtBuscar = location.state?.trim() || '';
+    const URI = txtBuscar ? API + encodeURIComponent(txtBuscar) : null; 
+
+    const getDatos = useCallback(async() => {
+        if (!URI) {
+            setError("No se proporcionó un término de búsqueda.");
+            setLoading(false);
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+        setDatos([]);
+
         try {
             const response = await fetch(URI);
             if (!response.ok)
@@ -29,11 +40,17 @@ const Search = () => {
         } finally {
             setLoading(false);
         }
-    };
+    }, [URI]);
 
     useEffect(() => {
-        getDatos();
-    }, [query]);
+        if (txtBuscar) {
+            getDatos();
+        } else {
+            // Si no hay búsqueda, mostramos error inmediatamente
+            setError("No se proporcionó un término de búsqueda.");
+            setLoading(false);
+        }
+    }, [txtBuscar, getDatos]);
 
     if (loading) {
         return (
@@ -56,9 +73,13 @@ const Search = () => {
             <ModalProd item={datoSelected} />
       
             <div className="row">
-                {datos.map((item, index) => (
-                <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} />
-                ))}
+                {datos.length > 0 ? (
+                    (datos.map((item, index) => (
+                    <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} />
+                    )))
+                ) : (
+                    <p>No hay nada</p>
+                )}
             </div>
         </>
     )
