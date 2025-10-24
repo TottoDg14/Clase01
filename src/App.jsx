@@ -79,6 +79,44 @@ const App = () => {
     }
   };
 
+  // Función para enviar el pedido
+  const enviarPedido = () => {
+    const confirmacion = window.confirm("¿Desea finalizar la compra?");
+    if (!confirmacion) return; // Sale si cancela
+    // Validar carrito vacío
+    if (carrito.length === 0) {
+      alert("El carrito está vacío");
+      return;
+    }
+
+    fetch("https://dummyjson.com/carts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        userId: 1,
+        products: carrito.map((item) => ({
+          id: item.id,
+          quantity: item.cantidad,
+        })),
+      }),
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Error ${res.status}: ${res.statusText}`);
+      }
+      return res.json();
+    })
+    .then((data) => {
+      console.log("Pedido creado:", data);
+      alert("✅ ¡Gracias por su compra!\nID del carrito: " + data.id);
+      setCarrito([]); // Vaciar SOLO si fue exitoso
+    })
+    .catch((error) => {
+      console.error("Error al procesar la compra:", error);
+      alert("❌ Error al procesar la compra:\n" + error.message);
+    });
+  };
+
   // zona de renderizado
   return (
     <BrowserRouter>
@@ -89,6 +127,7 @@ const App = () => {
           eliminarDelCarrito={eliminarDelCarrito}
           actualizarCantidad={actualizarCantidad}
           vaciarCarrito={vaciarCarrito}
+          enviarPedido={enviarPedido}
         />
         <div className="container-fluid py-3">
           <Routes>

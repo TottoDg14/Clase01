@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FaShoppingCart } from "react-icons/fa";
 import ShoppingCart from "./ShoppingCart";
 
-const Header = ({carrito, agregarAlCarrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito}) => {
+const Header = ({carrito, agregarAlCarrito, eliminarDelCarrito, actualizarCantidad, vaciarCarrito, enviarPedido}) => {
     const [txtbuscar, setTxtbuscar] = useState('');
 
     const manejoTxt = (event) => {
@@ -90,6 +90,7 @@ const Header = ({carrito, agregarAlCarrito, eliminarDelCarrito, actualizarCantid
                 eliminarDelCarrito={eliminarDelCarrito}
                 actualizarCantidad={actualizarCantidad}
                 vaciarCarrito={vaciarCarrito}
+                enviarPedido={enviarPedido}
             />
         </>
     )
