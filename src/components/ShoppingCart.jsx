@@ -62,8 +62,8 @@ const ShoppingCart = ({carrito, eliminarDelCarrito, actualizarCantidad, vaciarCa
                     </>
                 )}
 
-                <hr />
                 <div className="position-sticky bg-dark bottom-0 mt-3 py-3">
+                    <hr />
                     <div className='container-fluid'>
                         <table className='w-100'>
                             <tbody>
