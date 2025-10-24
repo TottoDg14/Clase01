@@ -72,7 +72,7 @@ const Header = ({carrito, agregarAlCarrito, eliminarDelCarrito, actualizarCantid
                 </div>
 
                 <button 
-                    className="btn me-3"
+                    className={`btn me-3 ${carrito.length > 0 ? 'btn-outline-warning' : ''}`}
                     type="button" data-bs-toggle="offcanvas" 
                     data-bs-target="#offcanvasRight" 
                     aria-controls="offcanvasRight">

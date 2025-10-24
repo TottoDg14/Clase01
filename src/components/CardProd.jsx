@@ -1,3 +1,4 @@
+import { FaEye, FaShoppingCart } from "react-icons/fa";
 import { Link } from "react-router-dom"
 
 const CardProd = ({item, modalCallback, carrito, agregarAlCarrito}) => {
@@ -24,16 +25,25 @@ const CardProd = ({item, modalCallback, carrito, agregarAlCarrito}) => {
                     <p className="card-text text-body-secondary">{item.brand}</p>
                 </div>
                 <div className="card-footer gap-2 d-flex justify-content-between">
-                    <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#fastView" onClick={modalCallback}>Vista Rapida</button>
                     <Link to={`/detalle/${item.id}/${item.title}`} className="btn btn-primary">Ver M&aacute;s</Link>
-                </div>
-                <div className="mt-2 border-top py-2 text-center">
-                    <button
-                        className="btn btn-success btn-sm"
-                        onClick={handleAgregar}
-                    >
-                    + Agregar al Carrito
-                    </button>
+
+                    <div className="d-flex gap-1">
+                        <button type="button" 
+                            className="btn btn-secondary" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#fastView" 
+                            onClick={modalCallback}
+                        >
+                            <FaEye />
+                        </button>
+                        <button
+                            className="btn btn-success"
+                            onClick={handleAgregar}
+                        >
+                            +
+                            <FaShoppingCart />
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
