@@ -11,7 +11,7 @@ const ShoppingCart = ({carrito, eliminarDelCarrito, actualizarCantidad, vaciarCa
     }, [carrito]);
 
     return (
-        <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div className="offcanvas offcanvas-end" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
             <div className="offcanvas-header">
                 <h5 className="offcanvas-title" id="offcanvasRightLabel">Lista de Compras</h5>
                 <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -21,7 +21,7 @@ const ShoppingCart = ({carrito, eliminarDelCarrito, actualizarCantidad, vaciarCa
                     <p className="text-center">Tu carrito está vacío</p>
                 ) : (
                     <>
-                        {carrito.map((item, index) => {
+                        {carrito.map((item, index) => (
                             <div key={index} className='card mb-3'>
                                 <div className='card-header p-0 text-center'>
                                     <img src={item.thumbnail} alt={item.title} className="img-fluid mb-2"  />
@@ -53,7 +53,7 @@ const ShoppingCart = ({carrito, eliminarDelCarrito, actualizarCantidad, vaciarCa
                                     </div>
                                 </div>
                             </div>
-                        })}
+                        ))}
                     </>
                 )}
             </div>
