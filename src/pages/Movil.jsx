@@ -4,7 +4,7 @@ import ModalProd from "../components/ModalProd";
 
 const API='https://dummyjson.com/products/category/smartphones';
 
-const Movil = () => {
+const Movil = ({carrito, agregarAlCarrito}) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -52,7 +52,7 @@ const Movil = () => {
       
       <div className="row">
         {datos.map((item, index) => (
-          <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} />
+          <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} carrito={carrito} agregarAlCarrito={agregarAlCarrito} />
         ))}
       </div>
     </>

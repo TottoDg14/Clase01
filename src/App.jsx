@@ -133,14 +133,14 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home/>}/>
             <Route path="/inicio" element={<Home/>}/>
-            <Route path="/movil" element={<Movil/>}/>
-            <Route path="/laptop" element={<Laptop/>}/>
+            <Route path="/movil" element={<Movil carrito={carrito} agregarAlCarrito={agregarAlCarrito} />}/>
+            <Route path="/laptop" element={<Laptop carrito={carrito} agregarAlCarrito={agregarAlCarrito} />}/>
             <Route path="/tienda" element={<Store carrito={carrito} agregarAlCarrito={agregarAlCarrito} />}/>
             <Route path="/tabla" element={<Table/>}/>
-            <Route path="/categorias/:category" element={<Category/>}/>
+            <Route path="/categorias/:category" element={<Category carrito={carrito} agregarAlCarrito={agregarAlCarrito} />}/>
 
             <Route path="/detalle/:id/:title" element={<Detalle/>}/>
-            <Route path="/busquedas" element={<Search/>}/>
+            <Route path="/busquedas" element={<Search carrito={carrito} agregarAlCarrito={agregarAlCarrito} />}/>
             <Route path="*" element={'404 - No se encontro el contenido.'}/>
           </Routes>
         </div>

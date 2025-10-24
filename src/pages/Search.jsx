@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 const API='https://dummyjson.com/products/search?q=';
 
-const Search = () => {
+const Search = ({carrito, agregarAlCarrito}) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -75,7 +75,7 @@ const Search = () => {
             <div className="row">
                 {datos.length > 0 ? (
                     (datos.map((item, index) => (
-                    <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} />
+                    <CardProd key={index} item={item} index={index} modalCallback={() => setProducto(index)} carrito={carrito} agregarAlCarrito={agregarAlCarrito} />
                     )))
                 ) : (
                     <p>No hay nada</p>
